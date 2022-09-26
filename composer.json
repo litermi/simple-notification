@@ -1,0 +1,46 @@
+{
+    "name": "litermi/simple-notification",
+    "description": "The Simple Notification is a package to send notification when has an error",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "log",
+        "database"
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/database": "^7.20|^8.19|^9.0",
+        "illuminate/http": "^7.20|^8.19|^9.0",
+        "illuminate/contracts": "^7.20|^8.19|^9.0",
+        "illuminate/config": "^7.20|^8.19|^9.0",
+        "illuminate/support": "^7.20|^8.19|^9.0",
+        "illuminate/bus": "^7.20|^8.19|^9.0",
+        "illuminate/notifications": "^7.20|^8.19|^9.0",
+        "laravel/slack-notification-channel": "^2.3",
+        "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+        "litermi/logs": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Litermi\\SimpleNotification\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Litermi\\SimpleNotification\\Providers\\ServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Cirel Ramos",
+            "email": "cirelramos@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
