@@ -33,7 +33,7 @@ return [
      * view/template alert email
      * example:
      */
-    'view-simple-email' => "templates.emails",
+    'view-simple-email' => "SimpleNotification.simple-notification",
 
     /*
      * cache tag name

@@ -17,6 +17,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return new SendSimpleNotificationService();
         });
 
+        $this->registerResources();
         $this->mergeConfig();
     }
 
@@ -41,6 +42,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
 //        $path = $this->getMigrationsPath();
 //        $this->publishes([$path => database_path('migrations')], 'migrations');
+    }
+
+    /**
+     * Register resources.
+     *
+     * @return void
+     */
+    protected function registerResources()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'SimpleNotification');
     }
 
     /**
