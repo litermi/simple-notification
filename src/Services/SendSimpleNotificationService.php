@@ -75,7 +75,7 @@ class SendSimpleNotificationService
     public function notification($subject, $message, $extraValues = []): void
     {
         if ($this->notification_email === true) {
-            SendEmailNotificationService::execute($message, $extraValues);
+            SendEmailNotificationService::execute($this->to_email, $subject, $message, $extraValues);
         }
         if ($this->notification_slack === true) {
             SendSlackNotificationService::execute($message, $this->channel_slack, $extraValues);

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static self slack()
  * @method static self channelSlack(string $channel)
  * @method static self toEmail(string $email)
- * @method static void notification(string $message, array $extraValues = [])
+ * @method static void notification(string $subject, string $message, array $extraValues = [])
  *
  */
 class SimpleNotificationFacade extends Facade
