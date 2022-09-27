@@ -19,20 +19,20 @@ class SendSlackNotificationService
      * @return bool|null
      */
     public static function execute(
-        $subject,
-        $message = "",
         $channelSlack = null,
+        $subject = null,
+        $message = "",
         $extraValues = [],
     ):
     ?bool {
         $infoEndpoint = $extraValues;
         $channelSlack = $channelSlack ?? config( 'simple-notification.default-channel-slack' );
         $infoEndpoint[ 'channel_slack' ] = $channelSlack;
-        $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
+        $infoEndpoint[ 'tracker' ] = GetTrackerService::execute()->toJson();
         $infoEndpoint[ 'message' ] = $message;
         try {
             Notification::route('slack', $channelSlack)
-                ->notify(new SimpleSlackNotification($infoEndpoint));
+                ->notify(new SimpleSlackNotification($subject, $infoEndpoint));
         }
         catch(Exception $exception) {
             LogConsoleFacade::full()->tracker()->log('error: ' . $exception->getMessage(), $infoEndpoint);
