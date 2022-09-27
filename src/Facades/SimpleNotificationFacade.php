@@ -3,12 +3,13 @@
 namespace Litermi\SimpleNotification\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Litermi\SimpleNotification\Services\SendSimpleNotificationService;
 
 /**
- * @method static self email()
- * @method static self slack()
- * @method static self channelSlack(string $channel)
- * @method static self toEmail(string $email)
+ * @method static SendSimpleNotificationService email()
+ * @method static SendSimpleNotificationService slack()
+ * @method static SendSimpleNotificationService channelSlack(string $channel)
+ * @method static SendSimpleNotificationService toEmail(string $email)
  * @method static void notification(string $subject, string $message, array $extraValues = [])
  *
  */

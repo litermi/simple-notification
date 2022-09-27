@@ -11,22 +11,22 @@ class SendSimpleNotificationService
     /**
      * @var
      */
-    public $notification_email = false;
+    private $notification_email = false;
 
     /**
      * @var
      */
-    public $notification_slack = false;
+    private $notification_slack = false;
 
     /**
      * @var null
      */
-    public $channel_slack = null;
+    private $channel_slack = null;
 
     /**
      * @var null
      */
-    public $to_email = null;
+    private $to_email = null;
 
     public function __construct()
     {
@@ -44,7 +44,7 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
-    public function toEmail($email): self
+    private function toEmail($email): self
     {
         $this->to_email = $email;
         return $this;
@@ -62,7 +62,7 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
-    public function channelSlack($channelSlack): self
+    private function channelSlack($channelSlack): self
     {
         $this->channel_slack = $channelSlack;
         return $this;
