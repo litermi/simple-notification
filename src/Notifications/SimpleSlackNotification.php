@@ -21,7 +21,7 @@ class SimpleSlackNotification extends Notification implements ShouldQueue
      *
      * @param array $data
      */
-    public function __construct(private $titleCustom, $data = [])
+    public function __construct(private $subject, $data = [])
     {
         $this->data = $data;
     }
@@ -49,7 +49,7 @@ class SimpleSlackNotification extends Notification implements ShouldQueue
         $message      = '';
         $environment  = array_key_exists('environment', $data) ? $data[ 'environment' ] : env('APP_ENV');
         $subject = "ENV:$environment 💡 / Notification in: ".env('APP_NAME')." ";
-        $subject = $this->titleCustom." ".$subject;
+        $subject = $this->subject." ".$subject;
         return (new SlackMessage)
             ->success()
             ->content($subject)

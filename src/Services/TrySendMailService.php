@@ -24,8 +24,8 @@ class TrySendMailService
             static function () use ($to, $subject, $infoEndpoint) {
                 $users = config('simple-notification.mail-recipient');
 
-                if(empty($subject) === false){
-                    $users = $subject;
+                if(empty($to) === false){
+                    $users = $to;
                 }
                 $data               = [];
                 $data[ 'ip' ]       = $infoEndpoint[ 'from' ] ?? null;

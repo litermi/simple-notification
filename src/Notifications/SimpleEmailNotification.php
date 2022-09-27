@@ -19,11 +19,11 @@ class SimpleEmailNotification extends Notification implements ShouldQueue
 
     private $via;
 
-    private $titleCustom;
+    private $subject;
 
-    public function __construct($via, $titleCustom, $data)
+    public function __construct($via, $subject, $data)
     {
-        $this->titleCustom = $titleCustom;
+        $this->subject = $subject;
         $this->data = $data;
         $this->via = $via;
     }
@@ -50,7 +50,7 @@ class SimpleEmailNotification extends Notification implements ShouldQueue
         $data = $this->data['endpoint'];
         $environment  = array_key_exists('environment', $data) ? $data[ 'environment' ] : env('APP_ENV');
         $subject = "ENV:$environment 💡 / Notification in: ".env('APP_NAME')." ";
-        $subject = $this->titleCustom." ".$subject;
+        $subject = $this->subject." ".$subject;
 
         $view = config('simple-notification.view-simple-email');
 
