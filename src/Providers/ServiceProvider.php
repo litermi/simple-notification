@@ -51,7 +51,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'SimpleNotification');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'SimpleNotification');
     }
 
     /**
