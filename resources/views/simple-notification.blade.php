@@ -14,14 +14,13 @@
             <p style="padding: 15px; background: #f1f1f1; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px;">
                 <b>Time:</b> {{now()}} <br>
                 @foreach($endpoint as $key => $oneEndpoint)
-                    @if($key!=='headers')
+                    @if(is_array($oneEndpoint) === false)
                         <b>{{strtoupper($key)}}:</b> {{$oneEndpoint}} <br>
                     @endif
-                    @if($key==='headers')
-                        <br><br>
-                        <b>{{strtoupper($key)}}:</b> <br>
-                        @foreach($oneEndpoint as $keyHeader => $header)
-                            <b>{{strtoupper($keyHeader)}}:</b> {{$header}} <br>
+                    @if(is_array($oneEndpoint))
+                        <b>{{strtoupper($key)}}:</b><br>
+                        @foreach($oneEndpoint as $keyOne => $valueOne)
+                            {{$valueOne}} <br>
                         @endforeach
                     @endif
                 @endforeach
