@@ -17,11 +17,11 @@ class TrySendMailService
      * @param array $infoEndpoint
      * @return void
      */
-    public static function execute($to = null, $subject = null, array $infoEndpoint = []): void
+    public static function execute($to = null, $subject = null, $level = null, array $infoEndpoint = []): void
     {
         retry(
             5,
-            static function () use ($to, $subject, $infoEndpoint) {
+            static function () use ($to, $subject, $level, $infoEndpoint) {
                 $users = config('simple-notification.mail-recipient');
 
                 if(empty($to) === false){
@@ -33,7 +33,7 @@ class TrySendMailService
                 $data[ 'alert' ]    = '';
 
                 Notification::route('mail', $users)
-                    ->notify(new SimpleEmailNotification (['mail' ], $subject, $data));
+                    ->notify(new SimpleEmailNotification (['mail'], $subject, $level, $data));
 
             },
             100

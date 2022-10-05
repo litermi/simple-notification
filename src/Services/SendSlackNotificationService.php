@@ -21,6 +21,7 @@ class SendSlackNotificationService
     public static function execute(
         $channelSlack = null,
         $subject = null,
+        $level = null,
         $message = "",
         $extraValues = [],
     ):
@@ -32,7 +33,7 @@ class SendSlackNotificationService
         $infoEndpoint[ 'message' ] = $message;
         try {
             Notification::route('slack', $channelSlack)
-                ->notify(new SimpleSlackNotification($subject, $infoEndpoint));
+                ->notify(new SimpleSlackNotification($subject, $level, $infoEndpoint));
         }
         catch(Exception $exception) {
             LogConsoleFacade::full()->tracker()->log('error: ' . $exception->getMessage(), $infoEndpoint);

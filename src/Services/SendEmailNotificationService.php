@@ -18,6 +18,7 @@ class SendEmailNotificationService
     public static function execute(
         $to = null,
         $subject = null,
+        $level = null,
         $message = "",
         $extraValues = []
     ): bool {
@@ -26,7 +27,7 @@ class SendEmailNotificationService
         $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
 
         try {
-            TrySendMailService::execute($to, $subject, $infoEndpoint);
+            TrySendMailService::execute($to, $subject, $level, $infoEndpoint);
         }
         catch(Exception $exception) {
             LogConsoleFacade::full()->tracker()->log('error: ' . $exception->getMessage(), $infoEndpoint);

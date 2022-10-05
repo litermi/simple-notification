@@ -28,6 +28,11 @@ class SendSimpleNotificationService
      */
     private $to_email = null;
 
+    /**
+     * @var null
+     */
+    private $level = null;
+
     public function __construct()
     {
     }
@@ -44,9 +49,18 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
-    private function toEmail($email): self
+    public function toEmail($email): self
     {
         $this->to_email = $email;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function level($level): self
+    {
+        $this->level = $level;
         return $this;
     }
 
@@ -62,7 +76,7 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
-    private function channelSlack($channelSlack): self
+    public function channelSlack($channelSlack): self
     {
         $this->channel_slack = $channelSlack;
         return $this;
@@ -75,10 +89,22 @@ class SendSimpleNotificationService
     public function notification($subject, $message, $extraValues = []): void
     {
         if ($this->notification_slack === true) {
-            SendSlackNotificationService::execute($this->channel_slack, $subject, $message, $extraValues);
+            SendSlackNotificationService::execute(
+                $this->channel_slack,
+                $subject,
+                $this->level,
+                $message,
+                $extraValues
+            );
         }
         if ($this->notification_email === true) {
-            SendEmailNotificationService::execute($this->to_email, $subject, $message, $extraValues);
+            SendEmailNotificationService::execute(
+                $this->to_email,
+                $subject,
+                $this->level,
+                $message,
+                $extraValues
+            );
         }
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Litermi\SimpleNotification\Services\GetIconByLevelNotificationService;
 
 /**
  *
@@ -21,7 +22,7 @@ class SimpleEmailNotification extends Notification implements ShouldQueue
 
     private $subject;
 
-    public function __construct($via, $subject, $data)
+    public function __construct($via, $subject, private $level, $data)
     {
         $this->subject = $subject;
         $this->data = $data;
@@ -49,8 +50,9 @@ class SimpleEmailNotification extends Notification implements ShouldQueue
     {
         $data = $this->data['endpoint'];
         $environment  = array_key_exists('environment', $data) ? $data[ 'environment' ] : env('APP_ENV');
-        $subject = "ENV:$environment 💡 / Notification in: ".env('APP_NAME')." ";
-        $subject = $this->subject." ".$subject;
+        $subject = "/ Notification in: ".env('APP_NAME')." ";
+        $subject = "ENV:$environment ".GetIconByLevelNotificationService::execute($this->level)." "
+            .$this->subject ." " .$subject;
 
         $view = config('simple-notification.view-simple-email');
 
