@@ -83,10 +83,12 @@ class SendSimpleNotificationService
     }
 
     /**
-     * @param $message
+     * @param $subject
+     * @param string $message
+     * @param array $extraValues
      * @return void
      */
-    public function notification($subject, $message, $extraValues = []): void
+    public function notification($subject, string $message = '', $extraValues = []): void
     {
         if ($this->notification_slack === true) {
             SendSlackNotificationService::execute(
