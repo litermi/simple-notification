@@ -67,6 +67,24 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
+    public function warning(): self
+    {
+        $this->level = 1;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function error(): self
+    {
+        $this->level = 2;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
     public function slack(): self
     {
         $this->notification_slack = true;

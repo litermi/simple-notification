@@ -27,6 +27,11 @@ class TrySendMailService
                 if(empty($to) === false){
                     $users = $to;
                 }
+
+                if(is_string($users)){
+                    $users = explode(",", $users);
+                }
+
                 $data               = [];
                 $data[ 'ip' ]       = $infoEndpoint[ 'from' ] ?? null;
                 $data[ 'endpoint' ] = $infoEndpoint;

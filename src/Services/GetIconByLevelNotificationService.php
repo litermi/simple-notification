@@ -9,7 +9,7 @@ class GetIconByLevelNotificationService
 {
 
     /**
-     * code: 1=log, 2=warning, 3=error
+     * code: 0=log, 1=warning, 2=error
      *
      * @param $code
      * @return string
