@@ -1,6 +1,6 @@
 <?php
 
-namespace Litermi\Logs\Services;
+namespace Litermi\SimpleNotification\Services;
 
 use Illuminate\Support\Str;
 
@@ -27,7 +27,8 @@ class GetTrackerService
             return collect(['error_tracker' => $exception->getMessage(), 'line' => $exception->getLine()]);
         }
 
-        return $tracker;
+        $tracker = $tracker->toJson();
+        return str_replace("\\", "", $tracker);
     }
 
     private static function filterHasRoute(): callable

@@ -3,7 +3,6 @@
 namespace Litermi\SimpleNotification\Services;
 
 use Litermi\Logs\Facades\LogConsoleFacade;
-use Litermi\Logs\Services\GetTrackerService;
 use Exception;
 
 /**
