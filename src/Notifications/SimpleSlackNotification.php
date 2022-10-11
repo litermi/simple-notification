@@ -3,7 +3,6 @@
 namespace Litermi\SimpleNotification\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Litermi\SimpleNotification\Services\GetIconByLevelNotificationService;
@@ -11,7 +10,7 @@ use Litermi\SimpleNotification\Services\GetIconByLevelNotificationService;
 /**
  *
  */
-class SimpleSlackNotification extends Notification implements ShouldQueue
+class SimpleSlackNotification extends Notification
 {
     use Queueable;
 
