@@ -58,15 +58,6 @@ class SendSimpleNotificationService
     /**
      * @return $this
      */
-    public function level($level): self
-    {
-        $this->level = $level;
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
     public function warning(): self
     {
         $this->level = 1;

@@ -10,7 +10,6 @@ use Litermi\SimpleNotification\Services\SendSimpleNotificationService;
  * @method static SendSimpleNotificationService slack()
  * @method static SendSimpleNotificationService channelSlack(string $channel)
  * @method static SendSimpleNotificationService toEmail(array $email)
- * @method static SendSimpleNotificationService level(int $level)
  * @method static SendSimpleNotificationService warning()
  * @method static SendSimpleNotificationService error()
  * @method static void notification(string $subject, string $message = '', array $extraValues = [])
