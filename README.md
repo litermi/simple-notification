@@ -38,12 +38,19 @@ php artisan vendor:publish --provider="Litermi\SimpleNotification\Providers\Serv
 
 
 ## Usage
-
+The default notifications are set as Log type if the warning() or error() methods are not specified.
 ```php
 $extraValues['test'] = 1;
 SimpleNotificationFacade::email()->slack()->notification('message notification', $extraValues);
 ```
 
+## Usage of Notification Levels
+The default notifications are set as Log type if the warning() or error() methods are not specified.
+```php
+$extraValues['test'] = 1;
+SimpleNotificationFacade::email()->slack()->warning()->notification('message notification', $extraValues);
+SimpleNotificationFacade::email()->slack()->error()->notification('message notification', $extraValues);
+```
 
 ## License
 
