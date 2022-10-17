@@ -44,8 +44,6 @@ $extraValues['test'] = 1;
 SimpleNotificationFacade::email()->slack()->notification('message notification', $extraValues);
 SimpleNotificationFacade::email()->slack()->warning()->notification('message notification', $extraValues);
 SimpleNotificationFacade::email()->slack()->error()->notification('message notification', $extraValues);
-
-
 ```
 
 
