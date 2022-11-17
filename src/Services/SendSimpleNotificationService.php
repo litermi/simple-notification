@@ -35,6 +35,15 @@ class SendSimpleNotificationService
 
     public function __construct()
     {
+        $this->notification_email = false;
+
+        $this->notification_slack = false;
+
+        $this->channel_slack = null;
+
+        $this->to_email = null;
+
+        $this->level = null;
     }
 
     /**
