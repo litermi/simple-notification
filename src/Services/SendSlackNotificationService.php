@@ -29,6 +29,8 @@ class SendSlackNotificationService
         $channelSlack = $channelSlack ?? config( 'simple-notification.default-channel-slack' );
         $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
         $infoEndpoint[ 'message' ] = $message;
+        $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute($infoEndpoint);
+
         try {
             Notification::route('slack', $channelSlack)
                 ->notify(new SimpleSlackNotification($subject, $level, $infoEndpoint));
