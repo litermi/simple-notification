@@ -24,6 +24,7 @@ class SendEmailNotificationService
         $infoEndpoint[ 'message' ] = $message;
         $infoEndpoint = array_merge_recursive($infoEndpoint, $extraValues);
         $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
+        $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute($infoEndpoint);
 
         try {
             TrySendMailService::execute($to, $subject, $level, $infoEndpoint);
