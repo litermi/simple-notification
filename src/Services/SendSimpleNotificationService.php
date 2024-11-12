@@ -35,8 +35,19 @@ class SendSimpleNotificationService
      */
     private $level = null;
 
+    private $withoutTrace = false;
+
     public function __construct()
     {
+    }
+
+    /**
+     * @return $this
+     */
+    public function withoutTrace(): self
+    {
+        $this->withoutTrace = true;
+        return $this;
     }
 
     /**
@@ -115,7 +126,8 @@ class SendSimpleNotificationService
                 $subject,
                 $this->level,
                 $message,
-                $extraValues
+                $extraValues,
+                $this->withoutTrace,
             );
         }
         if ($this->notification_email === true) {
@@ -124,7 +136,8 @@ class SendSimpleNotificationService
                 $subject,
                 $this->level,
                 $message,
-                $extraValues
+                $extraValues,
+                $this->withoutTrace,
             );
         }
     }

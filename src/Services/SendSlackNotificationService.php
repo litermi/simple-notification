@@ -23,14 +23,19 @@ class SendSlackNotificationService
         $level = null,
         $message = "",
         $extraValues = [],
+        $withoutTrace = false,
     ):
     ?bool {
         $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute([]);
         $channelSlack = $channelSlack ?? config( 'simple-notification.default-channel-slack' );
-        $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
+
+        if($withoutTrace == false) {
+            $infoEndpoint['tracker'] = GetTrackerService::execute(getArray: true);
+            $infoEndpoint['tracker'] = self::printArrayRecursive($infoEndpoint['tracker']);
+        }
         $infoEndpoint[ 'message' ] = $message;
         try {
-            $infoEndpoint['extra_values'] = json_encode($extraValues);
+            $infoEndpoint['extra_values'] = self::printArrayRecursive($extraValues);
         }catch (Exception $exception){
             $infoEndpoint['extra_values'] = "error json code";
         }
@@ -44,5 +49,43 @@ class SendSlackNotificationService
         }
 
         return false;
+    }
+
+    public static function  printArrayRecursive($data, $indent = 0) {
+        $stringToReturn = "";
+        if(is_array($data) == false){
+            return $data;
+        }
+
+        foreach ($data as $key => $value) {
+            // Indent the output for readability
+            $indentStr = "".str_repeat('  ', $indent);
+
+            // If the value is an array, recurse
+            if (is_array($value)) {
+                $textKey = "$indentStr$key:";
+                if(is_int($key)==true){
+                    $textKey="";
+                }
+                if($indent==0){
+                    $stringToReturn.="\n\n\n";
+                }
+                if($indent==1){
+                    $stringToReturn.="\n";
+                }
+
+                if($indent==0) {
+                    $stringToReturn .= "$textKey";
+                }else{
+                    $stringToReturn .= "$textKey";
+                }
+                $stringToReturn .= self::printArrayRecursive($value, $indent + 1);
+            } else {
+                // Otherwise, print the key-value pair
+                $stringToReturn .= "$indentStr$key: $value \n";
+            }
+        }
+
+        return $stringToReturn ;
     }
 }

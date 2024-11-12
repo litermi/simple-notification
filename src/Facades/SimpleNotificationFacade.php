@@ -12,6 +12,7 @@ use Litermi\SimpleNotification\Services\SendSimpleNotificationService;
  * @method static SendSimpleNotificationService toEmail(array $email)
  * @method static SendSimpleNotificationService warning()
  * @method static SendSimpleNotificationService error()
+ * @method static SendSimpleNotificationService withoutTrace()
  * @method static void notification(string $subject, string $message = '', array $extraValues = [])
  *
  */

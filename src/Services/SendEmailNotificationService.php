@@ -19,12 +19,15 @@ class SendEmailNotificationService
         $subject = null,
         $level = null,
         $message = "",
-        $extraValues = []
+        $extraValues = [],
+        $withoutTrace= false,
     ): bool {
         $infoEndpoint                 = GetGlobalSpecialValuesFromRequestService::execute([]);
         $infoEndpoint['message']      = $message;
         $infoEndpoint['extra_values'] = $extraValues;
-        $infoEndpoint['tracker']      = GetTrackerService::execute();
+        if($withoutTrace == false){
+            $infoEndpoint['tracker']      = GetTrackerService::execute(getArray: true);
+        }
 
         try {
             TrySendMailService::execute($to, $subject, $level, $infoEndpoint);

@@ -47,7 +47,7 @@ class SimpleEmailNotification extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $data = $this->data['endpoint'];
+        $data = $this->data;
         $environment  = array_key_exists('environment', $data) ? $data[ 'environment' ] : env('APP_ENV');
         $subject = "/ Notification in: ".env('APP_NAME')." ";
         $subject = "ENV:$environment ".GetIconByLevelNotificationService::execute($this->level)." "
@@ -57,8 +57,9 @@ class SimpleEmailNotification extends Notification
 
         return (new MailMessage())
             ->subject($subject)
-            ->markdown($view, $this->data);
+            ->markdown($view, $data);
     }
+
 
 }
 

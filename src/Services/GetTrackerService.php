@@ -13,7 +13,7 @@ class GetTrackerService
     /**
      * @return mixed
      */
-    public static function execute($trace = [])
+    public static function execute($trace = [], $getArray=false)
     {
         try {
             if(empty($trace)){
@@ -25,6 +25,10 @@ class GetTrackerService
             $tracker = $tracker->values();
         }catch (\Exception $exception){
             return collect(['error_tracker' => $exception->getMessage(), 'line' => $exception->getLine()]);
+        }
+
+        if($getArray== true){
+            return $tracker->toArray();
         }
 
         $tracker = $tracker->toJson();

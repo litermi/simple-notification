@@ -37,11 +37,51 @@ class TrySendMailService
                 $data[ 'endpoint' ] = $infoEndpoint;
                 $data[ 'alert' ]    = '';
 
+                $data['endpoint'] = self::printArrayRecursive($data['endpoint']);
+
                 Notification::route('mail', $users)
                     ->notify(new SimpleEmailNotification (['mail'], $subject, $level, $data));
 
             },
             100
         );
+    }
+
+    public static function  printArrayRecursive($data, $indent = 0) {
+        $stringToReturn = "";
+        if(is_array($data) == false){
+           return $data;
+        }
+
+        foreach ($data as $key => $value) {
+            // Indent the output for readability
+            $indentStr = "".str_repeat('  ', $indent);
+
+            // If the value is an array, recurse
+            if (is_array($value)) {
+                $textKey = "$indentStr$key:";
+                if(is_int($key)==true){
+                    $textKey="";
+                }
+                if($indent==0){
+                    $stringToReturn.="<br><br><br>";
+                }
+                if($indent==1){
+                    $stringToReturn.="<br>";
+                }
+
+                if($indent==0) {
+                    $stringToReturn .= "<b>$textKey</b>";
+                }else{
+                    $stringToReturn .= "$textKey";
+                }
+                $stringToReturn .= self::printArrayRecursive($value, $indent + 1);
+            } else {
+                // Otherwise, print the key-value pair
+                $stringToReturn .= "$indentStr$key: $value <br>";
+            }
+        }
+
+        return $stringToReturn ;
     }
 }
