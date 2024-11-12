@@ -25,11 +25,15 @@ class SendSlackNotificationService
         $extraValues = [],
     ):
     ?bool {
-        $infoEndpoint = $extraValues;
+        $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute([]);
         $channelSlack = $channelSlack ?? config( 'simple-notification.default-channel-slack' );
         $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
         $infoEndpoint[ 'message' ] = $message;
-        $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute($infoEndpoint);
+        try {
+            $infoEndpoint['extra_values'] = json_encode($extraValues);
+        }catch (Exception $exception){
+            $infoEndpoint['extra_values'] = "error json code";
+        }
 
         try {
             Notification::route('slack', $channelSlack)

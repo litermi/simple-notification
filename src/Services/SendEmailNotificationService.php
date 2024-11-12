@@ -21,10 +21,10 @@ class SendEmailNotificationService
         $message = "",
         $extraValues = []
     ): bool {
-        $infoEndpoint[ 'message' ] = $message;
-        $infoEndpoint = array_merge_recursive($infoEndpoint, $extraValues);
-        $infoEndpoint[ 'tracker' ] = GetTrackerService::execute();
-        $infoEndpoint = GetGlobalSpecialValuesFromRequestService::execute($infoEndpoint);
+        $infoEndpoint                 = GetGlobalSpecialValuesFromRequestService::execute([]);
+        $infoEndpoint['message']      = $message;
+        $infoEndpoint['extra_values'] = $extraValues;
+        $infoEndpoint['tracker']      = GetTrackerService::execute();
 
         try {
             TrySendMailService::execute($to, $subject, $level, $infoEndpoint);

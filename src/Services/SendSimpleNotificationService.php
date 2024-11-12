@@ -2,6 +2,8 @@
 
 namespace Litermi\SimpleNotification\Services;
 
+use Litermi\Logs\Facades\LogConsoleFacade;
+
 /**
  *
  */
@@ -42,7 +44,7 @@ class SendSimpleNotificationService
      */
     public function email(): self
     {
-        $this->level = null;
+        $this->level              = null;
         $this->notification_email = true;
         return $this;
     }
@@ -79,9 +81,9 @@ class SendSimpleNotificationService
      */
     public function slack(): self
     {
-        $this->channel_slack = null;
+        $this->channel_slack      = null;
         $this->notification_slack = true;
-        $this->level = null;
+        $this->level              = null;
         return $this;
     }
 
@@ -102,6 +104,11 @@ class SendSimpleNotificationService
      */
     public function notification($subject, string $message = '', $extraValues = []): void
     {
+        LogConsoleFacade::full()->tracker()->log(
+            'LOG_SIMPLE_NOTIFICATION_' . $message,
+            $extraValues
+        );
+
         if ($this->notification_slack === true) {
             SendSlackNotificationService::execute(
                 $this->channel_slack,
